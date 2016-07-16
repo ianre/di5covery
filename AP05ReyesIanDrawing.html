@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    (function () {
+        function createCanvas() {
+
+
+            //dec canv
+            var canvas = document.createElement("canvas");
+            // set canv
+            canvas.setAttribute("id", "myCanvas");
+            document.body.appendChild(canvas);
+        }
+
+        var mouseDown = 0;
+        document.body.onmousedown = function () {
+            ++mouseDown;
+        }
+        document.body.onmouseup = function () {
+            --mouseDown;
+        }
+
+        function eventResponses() {
+            //get cnv
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            //window
+            canvas.width = 0.99 * window.innerWidth;
+            canvas.height = 0.99 * window.innerHeight;
+            // 1 percent
+            x = 0.01 * canvas.width;
+            y = 0.01 * canvas.height;
+
+            PREVX = 0;
+            PREVY = 0;
+            PREVX2 = 0;
+            PREVY2 = 0;
+            alert('drag for more effects');
+
+            var ang = 0;
+            var prevX = 50;
+            var prevY = 50;
+
+            tessX = 200;
+
+            ll = 7;
+
+
+            canvas.onmousemove = function () {
+                ctx.fillStyle = "dark gray";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                /**
+                 ctx.fillStyle = getRandomColor();
+                 ctx.textAlign = "center";
+                 ctx.font = "230px Arial";
+
+                 ctx.fillText("A E S T H E T I C", event.x, event.y);
+                 ctx.fillText("お腹が空きました", event.x, event.y + 200);
+                 */
+                //drawLine(100, 100, 20 ,20, ctx);
+                var locX = event.x;
+                var locY = event.y;
+
+                var absMax = 100;
+                var absMin = 1;
+
+
+                var yMax = canvas.height;
+                var yMin = 0;
+
+                var xMax = canvas.width;
+                var xMin = 0;
+
+
+                var percentY = (locY - yMin) / (yMax - yMin);
+                var percentX = (locX - xMin) / (xMax - xMin);
+                var outputX = percentX * 100;
+                var outputY = percentY * 100;
+
+
+
+
+                /**
+
+                 var goingUp = outputY > prevY && ( prevX + 5  >  outputX && prevX - 5 < outputY);
+                 var goingDown = outputY < prevY && ( prevX + 5  >  outputX && prevX - 5 < outputY);
+                 if(goingUp){
+                    for (var i = -50; i < 100; i++) {
+                        drawLineOnDegree(outputX, outputY + i, ang, 300, ctx);
+                    }
+                } else if( goingDown){
+                    for (var i = -50; i < 100; i++) {
+                        drawLineOnDegree(outputX, outputY - i, ang, 300, ctx);
+                    }
+                } else {
+                    for (var i = -50; i < 100; i++) {
+                        drawLineOnDegree(outputX + i, outputY + i, ang, 300, ctx);
+                        ang++;
+                    }
+                    ang -= 149;
+                }
+                 //********************************************************
+
+                 for (var i = -60; i < 100; i++) {
+
+                    drawLineOnDegree(outputX + i, outputY + i, 1.5 *ang , (i/6) * (i/6)  ,lineW, ctx);
+                    lineW -= 5/150;
+                    ang++;
+                }
+                 ang -= 161;
+                 */
+
+
+                if (mouseDown) {
+
+
+                    /**
+                    var goingLeft = outputX < prevX;
+                    var ll = 11;
+                    var w = 0;
+                    var lineW = 5;
+                    if (goingLeft) {
+
+                        //ctx.translate(0.16*x, 0.16*y);
+                        //ctx.scale(0.99, 0.99);
+                        for (var i = -100; i < 100; i++) {
+
+
+                            //drawTOnDegree(outputX - i, outputY - i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            //ctx.strokeStyle = "Crimson";
+
+                            drawTOnDegree(outputX + i, outputY + i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "MediumTurquoise";
+                            //drawTOnDegree(outputX - i, outputY + i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            //ctx.strokeStyle = "FloralWhite";
+                            //drawTOnDegree(outputX + i, outputY - i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            //ctx.strokeStyle = "Orange";
+
+
+                            //drawAesthetics(locX + i, locY + i, ang, ctx);
+
+                            //ctx.rotate(-Math.PI * 2 /6);
+                            //"rgb(155, 102, 102)";
+
+                            lineW = 5 * Math.abs(Math.abs(i) - 100) / 100;
+                            ang++;
+                        }
+                        PREVX = 0;
+                        PREVY = 0;
+                        PREVX2 = 0;
+                        PREVY2 = 0;
+                        ang -= 201;
+                        for (var i = -100; i < 100; i++) {
+
+
+                                                       drawTOnDegree(outputX - i, outputY - i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Crimson";
+                            //drawTOnDegree(outputX + i, outputY + i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            //ctx.strokeStyle = "MediumTurquoise";
+                            //drawTOnDegree(outputX - i, outputY + i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            //ctx.strokeStyle = "FloralWhite";
+                            //drawTOnDegree(outputX + i, outputY - i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            //ctx.strokeStyle = "Orange";
+
+
+                            //drawAesthetics(locX + i, locY + i, ang, ctx);
+
+                            //ctx.rotate(-Math.PI * 2 /6);
+                            //"rgb(155, 102, 102)";
+
+                            lineW = 5 * Math.abs(Math.abs(i) - 100) / 100;
+                            ang++;
+                        }
+                        ang -= 201;
+
+
+                    } else {
+
+                        //ctx.translate(-0.16* x, -0.16*y);
+                        //ctx.scale(1.01, 1.01);
+                        for (var i = -100; i < 100; i++) {
+
+
+                            //drawTOnDegree(outputX - i, outputY - i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            //ctx.strokeStyle = "Crimson";
+
+                            drawTOnDegree(outputX + i, outputY + i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "MediumTurquoise";
+                            //drawTOnDegree(outputX - i, outputY + i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            //ctx.strokeStyle = "FloralWhite";
+                            //drawTOnDegree(outputX + i, outputY - i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            //ctx.strokeStyle = "Orange";
+
+
+                            //drawAesthetics(locX + i, locY + i, ang, ctx);
+
+                            //ctx.rotate(-Math.PI * 2 /6);
+                            //"rgb(155, 102, 102)";
+
+                            lineW = 5 * Math.abs(Math.abs(i) - 100) / 100;
+                            ang++;
+                        }
+                        PREVX = 0;
+                        PREVY = 0;
+                        PREVX2 = 0;
+                        PREVY2 = 0;
+                        ang -= 201;
+                        for (var i = -100; i < 100; i++) {
+
+
+                            drawTOnDegree(outputX - i, outputY - i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Crimson";
+                            //drawTOnDegree(outputX + i, outputY + i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            //ctx.strokeStyle = "MediumTurquoise";
+                            //drawTOnDegree(outputX - i, outputY + i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            //ctx.strokeStyle = "FloralWhite";
+                            //drawTOnDegree(outputX + i, outputY - i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            //ctx.strokeStyle = "Orange";
+
+
+                            //drawAesthetics(locX + i, locY + i, ang, ctx);
+
+                            //ctx.rotate(-Math.PI * 2 /6);
+                            //"rgb(155, 102, 102)";
+
+                            lineW = 5 * Math.abs(Math.abs(i) - 100) / 100;
+                            ang++;
+                        }
+                        ang -= 201;
+
+                    }
+
+
+                     var goingLeft = outputX < prevX;
+                     var ll = 7;
+                     var w = 0;
+                     var lineW = 10;
+                     if (goingLeft) {
+
+                        //ctx.translate(0.16*x, 0.16*y);
+                        //ctx.scale(0.99, 0.99);
+                        for (var i = 0; i < 20; i++) {
+
+
+                            drawThingOnDegree(outputX - i, outputY - i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Crimson";
+                            drawThingOnDegree(outputX + i, outputY + i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "MediumTurquoise";
+                            drawThingOnDegree(outputX - i, outputY + i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "FloralWhite";
+                            drawThingOnDegree(outputX + i, outputY - i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Orange";
+
+
+                            //drawAesthetics(locX + i, locY + i, ang, ctx);
+
+                            //ctx.rotate(-Math.PI * 2 /6);
+                            //"rgb(155, 102, 102)";
+
+                            lineW = 5 * Math.abs(Math.abs(i) - 100) / 100;
+                            ang++;
+                        }
+                        ang -= 201;
+
+
+                    } else {
+
+                        //ctx.translate(-0.16* x, -0.16*y);
+                        //ctx.scale(1.01, 1.01);
+                        for (var i = -100; i < 100; i++) {
+                            drawThingOnDegree(outputX - i, outputY - i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Crimson";
+                            drawThingOnDegree(outputX + i, outputY + i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "MediumTurquoise";
+                            drawThingOnDegree(outputX - i, outputY + i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "FloralWhite";
+                            drawThingOnDegree(outputX + i, outputY - i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Orange";
+
+                            //drawAesthetics(locX + i, locY + i, ang, ctx);
+
+                            //ctx.rotate(Math.PI * 2 / 6);
+                            //lineW -= 5/150;
+
+                            lineW = 5 * Math.abs(Math.abs(i) - 100) / 100;
+                            ang++;
+                        }
+                        ang -= 199;
+
+                    }
+
+
+
+                     var goingLeft = outputX < prevX;
+                     var ll = 7;
+                     var w = 0;
+                     var lineW = 10;
+                     if (goingLeft) {
+                        for (var i = -100; i < 100; i++) {
+
+
+
+                            drawLineOnDegree(outputX - i, outputY - i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Crimson";
+                            drawLineOnDegree(outputX + i, outputY + i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "MediumTurquoise";
+                            drawLineOnDegree(outputX - i, outputY + i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "FloralWhite";
+                            drawLineOnDegree(outputX + i, outputY - i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Orange";
+                            lineW = 5 * Math.abs(Math.abs(i) - 100) / 100;
+                            ang++;
+                        }
+                        ang -= 200;
+
+
+                    } else {
+                        for (var i = -100; i < 100; i++) {
+                            drawLineOnDegree(outputX - i, outputY - i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Crimson";
+                            drawLineOnDegree(outputX + i, outputY + i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "MediumTurquoise";
+                            drawLineOnDegree(outputX - i, outputY + i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "FloralWhite";
+                            drawLineOnDegree(outputX + i, outputY - i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Orange";
+                            lineW = 5 * Math.abs(Math.abs(i) - 100) / 100;
+                            ang++;
+                        }
+                        ang -= 200;
+
+                    }
+
+                     */
+					 if(isKeyDown(1)){
+						alert('drag for more effects');
+					 }
+					 
+                    var goingLeft = outputX < prevX;
+					
+                    var w = 0;
+                    var lineW = 10;
+                    var AA = 1;
+                    if (goingLeft) {
+                        ll --;
+
+                        //ctx.translate(0.16*x, 0.16*y);
+                        //ctx.scale(0.99, 0.99);
+                        for (var i = -100; i < 100; i++) {
+                            AA++;
+                            drawLineOnDegree(outputX - i, outputY - i,AA + 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            AA++;
+                            ctx.strokeStyle = "Crimson";
+                            drawLineOnDegree(outputX + i, outputY + i,AA + 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            AA++;
+                            ctx.strokeStyle = "MediumTurquoise";
+                            drawLineOnDegree(outputX - i, outputY + i, AA +-1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            AA++;
+                            ctx.strokeStyle = "FloralWhite";
+                            drawLineOnDegree(outputX + i, outputY - i,AA + -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Orange";
+
+
+                            //drawAesthetics(locX + i, locY + i, ang, ctx);
+
+                            //ctx.rotate(-Math.PI * 2 /6);
+                            //"rgb(155, 102, 102)";
+
+                            lineW = 5 * Math.abs(Math.abs(i) - 100) / 100;
+                            ang++;
+                        }
+                        ang -= tessX - 1;
+                        //tessX ++;
+
+
+                    } else {
+                        ll ++;
+
+                        //ctx.translate(-0.16* x, -0.16*y);
+                        //ctx.scale(1.01, 1.01);
+                        for (var i = -100; i < 100; i++) {
+
+                            AA++;
+                            drawLineOnDegree(outputX - i, outputY - i,AA + 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            AA++;
+                            ctx.strokeStyle = "Crimson";
+                            drawLineOnDegree(outputX + i, outputY + i,AA + 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            AA++;
+                            ctx.strokeStyle = "MediumTurquoise";
+                            drawLineOnDegree(outputX - i, outputY + i, AA +-1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            AA++;
+                            ctx.strokeStyle = "FloralWhite";
+                            drawLineOnDegree(outputX + i, outputY - i,AA + -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Orange";
+
+
+                            //drawAesthetics(locX + i, locY + i, ang, ctx);
+
+                            //ctx.rotate(Math.PI * 2 / 6);
+                            //lineW -= 5/150;
+
+                            lineW = 5 * Math.abs(Math.abs(i) - 100) / 100;
+                            ang++;
+                        }
+
+                        ang -= tessX + 1;
+                        //tessX --;
+
+
+                    }
+                } else {
+                    var goingLeft = outputX <= prevX;
+                    ll = 7;
+                    var w = 0;
+                    var lineW = 10;
+                    if (goingLeft) {
+
+                        //ctx.translate(0.16*x, 0.16*y);
+                        //ctx.scale(0.99, 0.99);
+                        for (var i = -100; i < 100; i++) {
+
+
+                            drawLineOnDegree(outputX - i, outputY - i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Crimson";
+                            drawLineOnDegree(outputX + i, outputY + i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "MediumTurquoise";
+                            drawLineOnDegree(outputX - i, outputY + i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "FloralWhite";
+                            drawLineOnDegree(outputX + i, outputY - i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Orange";
+
+
+                            //drawAesthetics(locX + i, locY + i, ang, ctx);
+
+                            //ctx.rotate(-Math.PI * 2 /6);
+                            //"rgb(155, 102, 102)";
+
+                            lineW = 5 * Math.abs(Math.abs(i) - 100) / 100;
+                            ang++;
+                        }
+                        ang -= 201;
+
+
+                    } else {
+
+                        //ctx.translate(-0.16* x, -0.16*y);
+                        //ctx.scale(1.01, 1.01);
+                        for (var i = -100; i < 100; i++) {
+                            drawLineOnDegree(outputX - i, outputY - i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Crimson";
+                            drawLineOnDegree(outputX + i, outputY + i, 1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "MediumTurquoise";
+                            drawLineOnDegree(outputX - i, outputY + i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "FloralWhite";
+                            drawLineOnDegree(outputX + i, outputY - i, -1.5 * ang, (i / ll) * (i / ll), lineW - w, ctx);
+                            ctx.strokeStyle = "Orange";
+
+                            //drawAesthetics(locX + i, locY + i, ang, ctx);
+
+                            //ctx.rotate(Math.PI * 2 / 6);
+                            //lineW -= 5/150;
+
+                            lineW = 5 * Math.abs(Math.abs(i) - 100) / 100;
+                            ang++;
+                        }
+                        ang -= 199;
+
+                    }
+
+
+                }
+
+
+                //ctx.fillStyle = "blue";
+                //ctx.fillRect(0, 0, 10, 10);
+                prevX = outputX;
+                prevY = outputY;
+
+            }
+        }
+
+        function drawAesthetics(scaleX, scaleY, ang, ctx) {
+
+
+            ctx.fillStyle = getRandomColor();
+            ctx.textAlign = "center";
+            ctx.font = "50px Arial";
+
+
+            ctx.fillText("A E S T H E T I C", scaleX, scaleY);
+            ctx.fillText("お腹が空きました", scaleX, scaleY + 30);
+            //ctx.rotate(Math.PI * 2 / (-ang * 6));
+
+            ctx.fillStyle = "black";
+
+
+        }
+
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.round(Math.random() * 15)];
+            }
+            return color;
+        }
+
+
+        function myArc(xR, yR, radiusR, angS, angE, ctx) {
+            alert("Hello! I am an alert box!!");
+            var xToScale = xR * x;
+            var yToScale = yR * y;
+            var rToScale = radiusR * ((x + y) / 2.0);
+            var angSCALE = angS * (Math.PI / 180);
+            var endSCALE = angE * (Math.PI / 180);
+            var tempW = ctx.lineWidth;
+            ctx.lineWidth = 10;
+            ctx.arc(xToScale, yToScale, rToScale, angSCALE, endSCALE);
+            ctx.stroke();
+            ctx.lineWidth = tempW;
+        }
+
+        function drawThingOnDegree(xCenter, yCenter, angleDEG, radius, lineW, ctx) {
+            myArc(xCenter, yCenter, radius, 0, angleDEG, ctx);
+            var ang = angleDEG * (Math.PI / 180.0);
+            var pi2 = Math.PI / 1.0;
+            var x1 = (xCenter * x ) - (  (radius * ((x + y) / 2.0)) * ( Math.cos(pi2 - ang)));
+            var y1 = (yCenter * y ) - ( (radius * ((x + y) / 2.0)) * ( Math.sin(pi2 - ang)));
+            var x2 = (xCenter * x) + (   (radius * ((x + y) / 2.0)) * ( Math.cos(pi2 - ang)));
+            var y2 = (yCenter * y ) + (  (radius * ((x + y) / 2.0)) * ( Math.sin(pi2 - ang)));
+            drawLine(x1, y1, x2, y2, lineW, ctx);
+        }
+
+        function drawTOnDegree(xCenter, yCenter, angleDEG, radius, lineW, ctx) {
+            var ang = angleDEG * (Math.PI / 180.0);
+            var pi2 = Math.PI / 1.0;
+            var x1 = (xCenter * x ) - (  (radius * ((x + y) / 2.0)) * ( Math.cos(pi2 - ang)));
+            var y1 = (yCenter * y ) - ( (radius * ((x + y) / 2.0)) * ( Math.sin(pi2 - ang)));
+            var x2 = (xCenter * x) + (   (radius * ((x + y) / 2.0)) * ( Math.cos(pi2 - ang)));
+            var y2 = (yCenter * y ) + (  (radius * ((x + y) / 2.0)) * ( Math.sin(pi2 - ang)));
+            if(lineW < 5){
+                drawLine(PREVX, PREVY, PREVX2, PREVY2, lineW, ctx);
+                drawLine(PREVX, PREVY, x2, y2,lineW, ctx);
+                drawLine(PREVX, PREVY, x1, y1, lineW, ctx);
+                drawLine(PREVX2, PREVY2, x2, y2,lineW, ctx);
+                drawLine(PREVX2, PREVY2, x1, y1, lineW, ctx);
+            }
+
+            PREVX = x1;
+            PREVY = y1;
+            PREVX2 = x2;
+            PREVY2 = y2;
+
+            //drawLine(x1, y1, x2, y2, lineW, ctx);
+        }
+
+
+        function drawLineOnDegree(xCenter, yCenter, angleDEG, radius, lineW, ctx) {
+            var ang = angleDEG * (Math.PI / 180.0);
+            var pi2 = Math.PI / 1.0;
+            var x1 = (xCenter * x ) - (  (radius * ((x + y) / 2.0)) * ( Math.cos(pi2 - ang)));
+            var y1 = (yCenter * y ) - ( (radius * ((x + y) / 2.0)) * ( Math.sin(pi2 - ang)));
+            var x2 = (xCenter * x) + (   (radius * ((x + y) / 2.0)) * ( Math.cos(pi2 - ang)));
+            var y2 = (yCenter * y ) + (  (radius * ((x + y) / 2.0)) * ( Math.sin(pi2 - ang)));
+            drawLine(x1, y1, x2, y2, lineW, ctx);
+        }
+
+        function drawLine(x1, y1, x2, y2, lineW, ctx) {
+
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+
+            ctx.lineWidth = lineW;
+            ctx.closePath();
+            ctx.stroke()
+
+        }
+		var keyEnum = { W_Key:0, A_Key:1, S_Key:2, D_Key:3 };
+		var keyArray = new Array(4);
+
+		function onKeyDown()
+		{
+			alert('hai');
+		
+			if( key == 'w' )
+				keyArray[keyEnum.W_Key] = true;
+			if( key == 'a' )
+				keyArray[keyEnum.A_Key] = true;
+			if( key == 's' )
+				keyArray[keyEnum.S_Key] = true;
+			if( key == 'd' )
+				keyArray[keyEnum.D_Key] = true;
+				
+		
+		}
+
+		function onKeyUp()
+		{
+			
+			if( key == 'w' )
+				keyArray[keyEnum.W_Key] = false;
+			if( key == 'a' )
+				keyArray[keyEnum.A_Key] = false;
+			if( key == 's' )
+				keyArray[keyEnum.S_Key] = false;
+			if( key == 'd' )
+				keyArray[keyEnum.D_Key] = false;
+				
+		
+			
+		}
+
+		function isKeyDown(key)
+		{
+			return keyArray[key];
+		}
+
+        function onLoad() {
+            createCanvas();
+            eventResponses();
+
+        }
+
+        window.onload = function () {
+            onLoad();
+        };
+        window.onresize = function () {
+            eventResponses()
+        };
+    }).call(this);
+</script>
+</html>
